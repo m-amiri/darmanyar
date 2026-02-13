@@ -9,34 +9,14 @@ apps:
     disks:
       - name: "storage"
         mountTo: "/app/server/storage"
-        size: 5
-      
-      # اگه نیاز به دیسک جداگانه برای logs داری
-      # - name: "logs"
-      #   mountTo: "/app/server/logs"
-      #   size: 5
+        size: 10
     
     port: 3001
     
     envs:
-      # تنظیمات اصلی
-      - name: "STORAGE_DIR"
-        value: "/app/server/storage"
-      
-      - name: "SERVER_PORT"
-        value: "3001"
-      
-      # امنیت
-      - name: "AUTH_TOKEN"
-        value: "$RANDOM_STRING"
-      
-      - name: "JWT_SECRET"
-        value: "$RANDOM_STRING"
-      
-      # آدرس برنامه
-      - name: "SERVER_URL"
-        value: "https://$APP_URL"
-      
-      # تنظیمات LLM Provider (مثال برای استفاده از LM Studio)
-      #- name: "LLM_PROVIDER"
-      #  value: "generic-openai"
+      STORAGE_DIR: "/app/server/storage"
+      SERVER_PORT: "3001"
+      AUTH_TOKEN: "$RANDOM_STRING"
+      JWT_SECRET: "$RANDOM_STRING"
+      SERVER_URL: "https://$APP_URL"
+      VECTOR_DB: "lancedb"
