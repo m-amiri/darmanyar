@@ -1,0 +1,42 @@
+# liara-compose.yaml
+apps:
+  - id: "anythingllm"
+    name: "AnythingLLM"
+    image: "mintplexlabs/anythingllm:latest"
+    bundlePlanID: "standard"
+    planID: "medium-g2"
+    
+    disks:
+      - name: "storage"
+        mountTo: "/app/server/storage"
+        size: 5
+      
+      # اگه نیاز به دیسک جداگانه برای logs داری
+      # - name: "logs"
+      #   mountTo: "/app/server/logs"
+      #   size: 5
+    
+    port: 3001
+    
+    envs:
+      # تنظیمات اصلی
+      - name: "STORAGE_DIR"
+        value: "/app/server/storage"
+      
+      - name: "SERVER_PORT"
+        value: "3001"
+      
+      # امنیت
+      - name: "AUTH_TOKEN"
+        value: "$RANDOM_STRING"
+      
+      - name: "JWT_SECRET"
+        value: "$RANDOM_STRING"
+      
+      # آدرس برنامه
+      - name: "SERVER_URL"
+        value: "https://$APP_URL"
+      
+      # تنظیمات LLM Provider (مثال برای استفاده از LM Studio)
+      #- name: "LLM_PROVIDER"
+      #  value: "generic-openai"
